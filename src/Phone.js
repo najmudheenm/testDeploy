@@ -57,6 +57,8 @@ const Phone = ({ token }) => {
   }, [token]);
 
   const handleCall = () => {
+    console.log(number);
+    console.log(device);
     device.connect({ To: number });
   };
 

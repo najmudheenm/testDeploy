@@ -1,23 +1,30 @@
 import React, { useState } from "react";
+import axios from 'axios'
 import "./App.css";
 import Phone from "./Phone";
 
 const App = () => {
   const [token, setToken] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const identity = "phil";
 
   const handleClick = () => {
     setClicked(true);
-    fetch(`/voice/token?identity=${encodeURIComponent(identity)}`)
-      .then(response => response.json())
-      .then(({ token }) => setToken(token));
+  axios.post('https://4836-117-198-167-223.ngrok-free.app/api/1.0/voip/token',{
+      identity: "test"
+    }).then(response=>{
+      console.log(response.data.token);
+      setToken(response.data.token)
+    })
+
+    // fetch("/token",requestOptions)
+    //   .then((response) => response.json())
+    //   .then(({ token }) => setToken(token));
   };
 
   return (
     <div className="app">
       <header className="App-header">
-        <h1>React &amp; Twilio Phone</h1>
+        <h1>Freston app</h1>
       </header>
 
       <main>
@@ -27,9 +34,7 @@ const App = () => {
       </main>
 
       <footer>
-        <p>
-          Built on Twitch by <a href="https://twitch.tv/phil_nash">phil_nash</a>
-        </p>
+        <p>Built on Twitch by Najmudheen</p>
       </footer>
     </div>
   );
